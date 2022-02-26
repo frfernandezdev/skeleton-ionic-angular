@@ -1,0 +1,7 @@
+{
+  "name": "skeleton-ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
