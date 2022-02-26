@@ -1,0 +1,15 @@
+version: '3'
+
+
+services:
+  app: 
+    build: .
+    environment:
+      - SENTRY_SKIP_AUTO_RELEASE=true
+      # - ANDROID_BUILD_TOOLS_VERISON=30.0.3
+      # - ANDROID_PLATFORMS_VERSION=30
+      # - NODE_VERSION=16.14.0
+    network_mode: "host"
+    ports:
+      - 8101:8101
+
