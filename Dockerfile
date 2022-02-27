@@ -84,7 +84,7 @@ COPY --from=nvm /root/.nvm /root/.nvm
 # Update and Upgrade OS
 RUN apt-get -qq update && \
 			apt-get -qq upgrade && \
-			apt-get -qq install wget
+			apt-get -qq install wget gradle 
 
 # Java 8 
 RUN apt-get -qq install openjdk-8-jdk
@@ -101,7 +101,7 @@ RUN . "${NVM_DIR}/nvm.sh" && nvm alias default v${NODE_VERSION}
 
 WORKDIR /app
 
-RUN npm i -g cordova @ionic/cli
+RUN npm i -g cordova native-run @ionic/cli
 
 COPY . .
 
