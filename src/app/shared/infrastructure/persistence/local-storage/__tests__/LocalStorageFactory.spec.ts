@@ -4,9 +4,9 @@ describe('LocalStorageFactory', () => {
   afterEach(() => localStorage.clear());
 
   it('should be add new item to localstorage', () => {
-    const _localstorage = new LocalStorageFactory();
+    const localstorage = new LocalStorageFactory();
 
-    _localstorage.add('test', 'test-value');
+    localstorage.add('test', 'test-value');
     expect(localStorage.getItem('test')).toBe('test-value');
   });
 
