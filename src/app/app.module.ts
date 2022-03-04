@@ -8,10 +8,10 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/CoreModule';
 
 @NgModule({
-	declarations: [AppComponent],
-	entryComponents: [],
-	imports: [BrowserModule, IonicModule.forRoot(), CoreModule],
-	providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-	bootstrap: [AppComponent],
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), CoreModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
