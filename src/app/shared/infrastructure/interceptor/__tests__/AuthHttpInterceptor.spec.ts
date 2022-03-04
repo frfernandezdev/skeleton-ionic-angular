@@ -1,7 +1,7 @@
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
-  HttpClientTestingModule,
-  HttpTestingController,
+	HttpClientTestingModule,
+	HttpTestingController,
 } from '@angular/common/http/testing';
 import { Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -9,65 +9,65 @@ import { LocalStorageFactory } from '../../persistence/local-storage/LocalStorag
 import { AuthHttpInterceptor } from '../AuthHttpInterceptor';
 
 describe('AuthHttpInterceptor', () => {
-  @Injectable()
-  class TestService {
-    constructor(private http: HttpClient) {}
+	@Injectable()
+	class TestService {
+		constructor(private http: HttpClient) {}
 
-    getItems() {
-      return this.http.get('/testing');
-    }
-  }
+		getItems() {
+			return this.http.get('/testing');
+		}
+	}
 
-  let service: TestService;
-  let localstorage: LocalStorageFactory;
-  let httpMock: HttpTestingController;
+	let service: TestService;
+	let localstorage: LocalStorageFactory;
+	let httpMock: HttpTestingController;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        LocalStorageFactory,
-        TestService,
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthHttpInterceptor,
-          multi: true,
-        },
-      ],
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [HttpClientTestingModule],
+			providers: [
+				LocalStorageFactory,
+				TestService,
+				{
+					provide: HTTP_INTERCEPTORS,
+					useClass: AuthHttpInterceptor,
+					multi: true,
+				},
+			],
+		});
 
-    service = TestBed.get(TestService);
-    localstorage = TestBed.get(LocalStorageFactory);
-    httpMock = TestBed.get(HttpTestingController);
-  });
+		service = TestBed.get(TestService);
+		localstorage = TestBed.get(LocalStorageFactory);
+		httpMock = TestBed.get(HttpTestingController);
+	});
 
-  afterEach(() => {
-    localstorage.remove('token');
-  });
+	afterEach(() => {
+		localstorage.remove('token');
+	});
 
-  it('should add an Authorization header', () => {
-    let token = 'adef8egjac09sd9r';
-    localstorage.add('token', token);
-    service.getItems().subscribe((response) => {
-      expect(response).toBeTruthy();
-    });
+	it('should add an Authorization header', () => {
+		let token = 'adef8egjac09sd9r';
+		localstorage.add('token', token);
+		service.getItems().subscribe((response) => {
+			expect(response).toBeTruthy();
+		});
 
-    const httpRequest = httpMock.expectOne('/testing');
+		const httpRequest = httpMock.expectOne('/testing');
 
-    expect(httpRequest.request.headers.has('Authorization')).toBeTruthy();
-    expect(httpRequest.request.headers.get('Authorization')).toEqual(
-      `Bearer ${token}`
-    );
-  });
+		expect(httpRequest.request.headers.has('Authorization')).toBeTruthy();
+		expect(httpRequest.request.headers.get('Authorization')).toEqual(
+			`Bearer ${token}`
+		);
+	});
 
-  it("shouldn't have Authorization header", () => {
-    service.getItems().subscribe((response) => {
-      expect(response).toBeTruthy();
-    });
+	it("shouldn't have Authorization header", () => {
+		service.getItems().subscribe((response) => {
+			expect(response).toBeTruthy();
+		});
 
-    const httpRequest = httpMock.expectOne('/testing');
+		const httpRequest = httpMock.expectOne('/testing');
 
-    expect(httpRequest.request.headers.has('Authorization')).toBeFalsy();
-    expect(httpRequest.request.headers.get('Authorization')).toBeNull();
-  });
+		expect(httpRequest.request.headers.has('Authorization')).toBeFalsy();
+		expect(httpRequest.request.headers.get('Authorization')).toBeNull();
+	});
 });

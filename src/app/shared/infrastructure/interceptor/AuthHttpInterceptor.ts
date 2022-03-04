@@ -1,18 +1,18 @@
-import {
+import type {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LocalStorageFactory } from '../persistence/local-storage/LocalStorageFactory';
+import { Injectable } from '@angular/core';
+import type { Observable } from 'rxjs';
+import type { LocalStorageFactory } from '../persistence/local-storage/LocalStorageFactory';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
-  constructor(private localstorage: LocalStorageFactory) {}
+  public constructor(private localstorage: LocalStorageFactory) {}
 
-  intercept(
+  public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
