@@ -1,7 +1,7 @@
-import { LocalStorageFactory } from '../LocalStorageFactory';
+import type { LocalStorageFactory } from '../LocalStorageFactory';
 
-const LocalStorageFactoryMock = jest.fn(() =>
+const localStorageFactoryMock = jest.fn(() =>
   jest.createMockFromModule<LocalStorageFactory>('../LocalStorageFactory')
 );
 
-export { LocalStorageFactoryMock as LocalStorageFactory };
+export { localStorageFactoryMock as LocalStorageFactory };
