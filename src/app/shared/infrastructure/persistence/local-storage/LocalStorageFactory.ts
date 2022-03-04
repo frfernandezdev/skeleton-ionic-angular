@@ -1,19 +1,19 @@
-import { Nullable } from 'src/app/shared/domain/Nullable';
+import type { Nullable } from 'src/app/shared/domain/Nullable';
 
 export class LocalStorageFactory {
-  add(key: string, value: string) {
+  public add(key: string, value: string): void {
     localStorage.setItem(key, value);
   }
 
-  get(key: string): Nullable<string> {
+  public get(key: string): Nullable<string> {
     return localStorage.getItem(key);
   }
 
-  remove(key: string) {
+  public remove(key: string): void {
     localStorage.removeItem(key);
   }
 
-  clear() {
+  public clear(): void {
     localStorage.clear();
   }
 }
