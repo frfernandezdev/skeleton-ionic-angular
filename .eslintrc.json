@@ -120,7 +120,7 @@
 					},
 					{
 						"selector": ["class", "interface", "enum"], 
-						"format": ["StrictPascalCase"]
+						"format": ["PascalCase", "UPPER_CASE"]
 					}
 				]
 			}
