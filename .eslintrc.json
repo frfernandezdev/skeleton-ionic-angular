@@ -64,7 +64,7 @@
 				],
 				"@typescript-eslint/default-param-last": ["error"],
 				"@typescript-eslint/func-call-spacing": ["error"],
-				"@typescript-eslint/indent": ["error", "tab"],
+				"@typescript-eslint/indent": ["error", 2],
 				"@typescript-eslint/keyword-spacing": ["error"],
 				"@typescript-eslint/lines-between-class-members": ["error"],
 				"@typescript-eslint/member-delimiter-style": ["error"],
@@ -111,7 +111,7 @@
 					"error",
 					{
 						"selector": "default",
-						"format": ["strictCamelCase"],
+						"format": ["CamelCase"],
 						"leadingUnderscore": "forbid"
 					},
 					{
