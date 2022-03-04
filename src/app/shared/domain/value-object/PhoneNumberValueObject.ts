@@ -3,16 +3,16 @@ import { InvalidArgumentError } from './InvalidArgumentError';
 import { StringValueObject } from './StringValueObject';
 
 export class PhoneNumberValueObject extends StringValueObject {
-	public constructor(value: string) {
-		super(value);
-		this.ensureIsValidPhoneNumber(value);
-	}
+  public constructor(value: string) {
+    super(value);
+    this.ensureIsValidPhoneNumber(value);
+  }
 
-	private ensureIsValidPhoneNumber(value: string): void {
-		if (!isPhoneNumber(value, 'US')) {
-			throw new InvalidArgumentError(
-				`<${this.constructor.name}> doest not allow the value <${value}>`
-			);
-		}
-	}
+  private ensureIsValidPhoneNumber(value: string): void {
+    if (!isPhoneNumber(value, 'US')) {
+      throw new InvalidArgumentError(
+        `<${this.constructor.name}> doest not allow the value <${value}>`
+      );
+    }
+  }
 }

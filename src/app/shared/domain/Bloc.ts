@@ -1,4 +1,4 @@
-import { Subscription } from "./Subscription";
+import { Subscription } from './Subscription';
 
 export abstract class Bloc<T> {
   private internalState: T;
@@ -22,7 +22,7 @@ export abstract class Bloc<T> {
 
   subscribe(subscriber: Subscription<T>) {
     if (this.subscribers.has(subscriber)) {
-      throw new Error("This subscriber has already registered");
+      throw new Error('This subscriber has already registered');
     }
     this.subscribers.add(subscriber);
     this.changeState();
@@ -30,7 +30,7 @@ export abstract class Bloc<T> {
 
   unsubscribe(subscriber: Subscription<T>) {
     if (!this.subscribers.has(subscriber)) {
-      throw new Error("This subscriber is not registered");
+      throw new Error('This subscriber is not registered');
     }
     this.subscribers.delete(subscriber);
   }
