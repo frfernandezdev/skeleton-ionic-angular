@@ -12,7 +12,7 @@ export class Criteria {
 
   public constructor(
     filters: Filters,
-    order?: Order,
+    order: Order,
     limit?: number,
     offset?: number
   ) {
