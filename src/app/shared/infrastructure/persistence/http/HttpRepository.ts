@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import type { Observable } from 'rxjs';
 import { Criteria } from 'src/app/shared/domain/criteria/Criteria';
-import type { HttpClientFactory } from './HttpClientFactory';
 import { HttpCriteriaConverter } from './HttpCriteriaConverter';
 
 interface DTO {
@@ -8,26 +8,24 @@ interface DTO {
 }
 
 export abstract class HttpRepository<T extends DTO> {
-  protected abstract route: string;
-
-  protected constructor(private http: HttpClientFactory) {}
+  protected constructor(private http: HttpClient) {}
 
   public find<R = T | T[]>(
     endpoint?: string,
     criteria?: Criteria
   ): Observable<R> {
     const httpConvert = new HttpCriteriaConverter();
-    return this.http.get<R>(this.route + endpoint, {
+    return this.http.get<R>(endpoint, {
       params: httpConvert.convert(criteria),
     });
   }
 
   public findOne<R = T>(endpoint?: string): Observable<R> {
-    return this.http.get<R>(this.route + endpoint, {});
+    return this.http.get<R>(endpoint, {});
   }
 
   public create<R = T | T[]>(endpoint?: string, body?: R): Observable<R> {
-    return this.http.post<R>(this.route + endpoint, {
+    return this.http.post<R>(endpoint, {
       body,
     });
   }
@@ -38,14 +36,14 @@ export abstract class HttpRepository<T extends DTO> {
     body?: R
   ): Observable<R> {
     const httpConvert = new HttpCriteriaConverter();
-    return this.http.put<R>(this.route + endpoint, {
+    return this.http.put<R>(endpoint, {
       params: httpConvert.convert(criteria),
       body,
     });
   }
 
   public updateOne<R = T>(endpoint?: string, body?: R): Observable<R> {
-    return this.http.patch<R>(this.route + endpoint, {
+    return this.http.patch<R>(endpoint, {
       body,
     });
   }
@@ -55,7 +53,7 @@ export abstract class HttpRepository<T extends DTO> {
     criteria?: Criteria
   ): Observable<R> {
     const httpConvert = new HttpCriteriaConverter();
-    return this.http.delete<R>(this.route + endpoint, {
+    return this.http.delete<R>(endpoint, {
       params: httpConvert.convert(criteria),
     });
   }
