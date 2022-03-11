@@ -1,3 +1,3 @@
-export interface Config {
-  apiUrl: string;
+export abstract class Config {
+  public apiUrl: string;
 }
