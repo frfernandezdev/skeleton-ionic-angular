@@ -60,34 +60,36 @@ export class HttpCriteriaConverter {
 
   public convert(criteria: Criteria): HttpParams {
     const { filters, order, offset, limit } = criteria;
-    const params = new HttpParams();
+    let params = new HttpParams();
 
     if (criteria.hasOrder()) {
       const { orderBy, orderType } = order;
-      params.set('orderBy', orderBy.value);
-      params.set('orderType', orderType.value);
+      params = params
+        .append('orderBy', orderBy.value)
+        .append('orderType', orderType.value);
     }
 
     if (offset) {
-      params.set('offset', offset);
+      params = params.append('offset', offset);
     }
 
-    params.set('limit', limit);
-    params.set('offset', offset);
+    params = params.append('limit', limit).append('offset', offset);
 
     if (criteria.hasFilters()) {
-      this.generateQuery(params, filters);
+      params = this.generateQuery(params, filters);
     }
 
     return params;
   }
 
-  protected generateQuery(params: HttpParams, filters: Filters): void {
+  protected generateQuery(params: HttpParams, filters: Filters): HttpParams {
     filters.filters.map((filter) => {
       const { field, value } = this.queryForFilter(filter);
 
-      params.set(field, value);
+      params = params.append(field, value);
     });
+
+    return params;
   }
 
   private queryForFilter(filter: Filter): QueryObject {
